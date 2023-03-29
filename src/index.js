@@ -6,9 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  // Removing Strict Mode fixes the issue where the Transactions subscription is called twice.
+  <App />
 );
 
 // If you want to start measuring performance in your app, pass a function
