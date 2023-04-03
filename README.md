@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# eth-dash
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+eth-dash is a simple dashboard to view recent Ethereum transactions and their USD value.
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+1. Install Node.js if you haven't already
 
-### `npm start`
+2. Clone the eth-dash repository:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+`git clone https://github.com/csaroff/eth-dash.git`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Install dependencies:
 
-### `npm test`
+`npm install`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+4. Start the development server:
 
-### `npm run build`
+`npm start`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. View in browser at http://localhost:3000
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How it Works
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+eth-dash uses the Alchemy Web3 API to subscribe to new blocks on the Ethereum mainnet. When a new block is mined, it fetches the transactions in that block and looks up their value in USD using the CoinGecko API. It displays the transactions in a table, updating in real-time.
 
-### `npm run eject`
+The front-end is built with React and uses the React Hooks API.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Known Issues
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Due to an issue with the Web3 library, the subscription is not properly cleaned up when the component unmounts. This causes the callback to be called twice in React strict mode. I disabled strict-mode pending a fix is in Web3.js.
+(See: https://github.com/web3/web3.js/issues/3822)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Future Improvements
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Add additional metrics like gas used, tx fees, etc.
+- Improve styling and add dark mode
+- Cache API calls to prevent duplicate data & improve performance
+- Add tooltips/hover text for addresses
+- Add batching to fetch the transaction values.
+- Use the block number from the subscription instead of fetching the latest block's number.
